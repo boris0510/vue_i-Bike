@@ -1,0 +1,51 @@
+.hidden-h1{
+  text-indent:101%;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.active{
+  color: #669999 !important;
+}
+.btn-hover:hover{
+  background-color: #669999;
+  color: white;
+  border-color: #669999;
+}
+.btn:focus,.page-link:focus{
+  outline: 0 !important;
+  box-shadow: 0 0 0 0 ;
+}
+.a-hover:hover{
+  color:#669999 !important;
+}
+.a-active{
+  color:#669999 !important;
+}
+.table-nowrap{
+  white-space: nowrap;
+}
+input,textarea{
+  border-radius: 0 !important;
+}
+// 商品陰影
+.box-shadow {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .10);
+  transition: box-shadow .3s;
+  &:hover{
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .40);
+    cursor: pointer;
+  }
+}
+// select option 裡面放 Font Awesome 圖示
+.select-icon,option {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 1000;
+}
+// 分頁
+.page-link{
+  color: #212529;
+}
+.page-item.active .page-link {
+  background-color: #669999;
+  border-color: #669999;
+}
