@@ -1,6 +1,6 @@
 <template>
-  <div class="all">
-    <loading v-model:active="isLoading"/>
+  <div class="allBike mt-3">
+    <Loading v-model:active="isLoading"/>
     <!-- 商品內容 -->
     <div class="container px-0">
       <div class="row row-cols-1 row-cols-md-5 g-3">
@@ -11,13 +11,13 @@
             <div class="card-body text-center">
               <h4 class="card-title fw-bold">{{item.title}}</h4>
               <div class="d-flex justify-content-around align-items-end">
-                <div class="fs-6 text-black-50" v-if="!item.price">
+                <div class="fs-6 text-muted" v-if="!item.price">
                   NT$ {{ $filters.currency(item.origin_price) }}
                 </div>
-                <del class="fs-6 text-black-50" v-if="item.price">
+                <del class="fs-6 text-muted" v-if="item.price">
                   NT$ {{ $filters.currency(item.origin_price) }}
                 </del>
-                <div class="fs-5 text-org fw-bold" v-if="item.price">
+                <div class="fs-5 text-black fw-bold" v-if="item.price">
                   NT$ {{ $filters.currency(item.price) }}
                 </div>
               </div>
@@ -45,7 +45,7 @@
 import Pagination from '@/components/Pagination.vue'
 
 export default {
-  name: 'all',
+  name: 'AllBike',
   components: {
     Pagination
   },
@@ -61,9 +61,11 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products?page=${page}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        this.isLoading = false
-        this.products = response.data.products
-        this.pagination = response.data.pagination
+        if (response.data.success) {
+          this.products = response.data.products
+          this.pagination = response.data.pagination
+          this.isLoading = false
+        }
       })
       document.documentElement.scrollTop = 0
     },

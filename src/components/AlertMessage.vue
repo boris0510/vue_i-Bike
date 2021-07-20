@@ -1,12 +1,23 @@
 <template>
   <div class="message-alert">
-    <div class="alert alert-dismissible rounded-0 border-0"
-      :class="'alert-' + item.status"
-      v-for="(item, i) in messages" :key="i">
+    <div
+      class="alert alert-strong alert-dismissible rounded-0 border-0"
+      :class="'text-' + item.status"
+      v-for="(item, i) in messages"
+      :key="i"
+    >
       <i class="fas fa-check-circle me-1" v-if="item.status === 'success'"></i>
-      <i class="fas fa-exclamation-triangle me-1" v-if="item.status === 'danger'"></i>
+      <i
+        class="fas fa-exclamation-triangle me-1"
+        v-if="item.status === 'danger'"
+      ></i>
       {{ item.message }}
-      <button type="button" class="btn-sm btn-close" @click="removeMessage(i)" aria-label="Close"></button>
+      <button
+        type="button"
+        class="btn-sm btn-close"
+        @click="removeMessage(i)"
+        aria-label="Close"
+      ></button>
     </div>
   </div>
 </template>
@@ -47,7 +58,7 @@ export default {
     // 自定義名稱 'messsage:push'
     // message: 傳入參數
     // status: 樣式，預設值為 warning
-    this.emitter.on('message:push', (messages) => {
+    this.emitter.on('message:push', messages => {
       const { message, status = 'warning' } = messages
       this.updateMessage(message, status)
     })
@@ -60,8 +71,8 @@ export default {
 .message-alert {
   position: fixed;
   max-width: 50%;
-  top: 80px;
-  right: 20px;
+  top: 90px;
+  right: 30px;
   z-index: 1100;
 }
 </style>

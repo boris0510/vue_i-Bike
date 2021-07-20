@@ -3,12 +3,12 @@
   <GoTop/>
   <Banner/>
   <div class="FollowPage mt-5">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="container">
       <h1 class="fs-2 text-center fw-bold" v-if="followProduct.length !== 0">我的收藏</h1>
       <div class="d-flex flex-column align-items-center" v-if="followProduct.length === 0">
         <p class="fs-2 fw-bold">目前沒有收藏的產品 !</p>
-        <a href="#/products/all" class="btn btn-dark btn-hover rounded-0 border-0 mt-4">查看產品 Go</a>
+        <a href="#/products/all" class="btn btn-dark btn-hover rounded-0 mt-4">查看產品 Go</a>
       </div>
       <div class="row row-cols-1 row-cols-md-5 g-3 mt-5" v-if="followProduct.length !== 0">
         <div class="col" v-for="item in followProduct" :key="item.id">
@@ -24,7 +24,7 @@
                 <del class="fs-6 text-black-50" v-if="item.price">
                   NT$ {{ $filters.currency(item.origin_price) }}
                 </del>
-                <div class="fs-5 text-org fw-bold" v-if="item.price">
+                <div class="fs-5 text-strong fw-bold" v-if="item.price">
                   NT$ {{ $filters.currency(item.price) }}
                 </div>
               </div>
@@ -83,9 +83,7 @@ export default {
       document.documentElement.scrollTop = 0
     },
     getFollow () {
-      this.followProduct = this.products.filter((item) => {
-        return this.followData.indexOf(item.id) !== -1
-      })
+      this.followProduct = this.products.filter(item => this.followData.indexOf(item.id) !== -1)
     },
     getProduct (id) {
       this.$router.push(`/productPage/${id}`)
@@ -96,3 +94,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.FollowPage{
+  min-height: calc(100vh - 550px);
+}
+</style>

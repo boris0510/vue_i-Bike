@@ -2,7 +2,7 @@
   <Navber/>
   <GoTop/>
   <div class="productPage">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="container">
       <!-- 分類 -->
       <nav class="mb-md-4 d-flex justify-content-center justify-content-md-start" aria-label="breadcrumb">
@@ -15,9 +15,9 @@
       </nav>
       <!-- 內容 -->
       <div class="row d-flex justify-content-center">
-        <div class="col-md-6 d-flex justify-content-center">
+        <div class="col-md-6 p-0 d-flex justify-content-center">
           <div class="row">
-            <div class="col-12">
+            <div class="col p-0">
               <img :src="product.imageUrl" class="img-fluid" alt="商品照片">
             </div>
           </div>
@@ -25,10 +25,10 @@
         <div class="col-md-5 d-flex justify-content-center align-items-center mt-5 mt-md-0">
           <div class="ps-0 ps-md-5">
             <div class="d-flex justify-content-between">
-              <h4 class="text-success fw-bold fs-5">{{ product.category }}</h4>
+              <h4 class="fw-bold fs-5">{{ product.category }}</h4>
               <a href="#" title="加入收藏" @click.prevent="addFollow(product.id)">
-                <i class="far fa-heart text-org fs-4" v-if="followData.indexOf(product.id) === -1"></i>
-                <i class="fas fa-heart text-org fs-4" v-else></i>
+                <i class="far fa-heart text-strong fs-4" v-if="followData.indexOf(product.id) === -1"></i>
+                <i class="fas fa-heart text-strong fs-4" v-else></i>
               </a>
             </div>
             <h2 class="fw-bold">{{ product.title }}</h2>
@@ -43,13 +43,13 @@
               <small>已售出 {{ Math.floor(Math.random() * 150) }}</small>
             </div>
             <hr class="mt-4">
-            <h4 class="text-primary fw-bold fs-5 mt-4">產品特色</h4>
+            <h4 class="text-strong fw-bold fs-5 mt-4">產品特色</h4>
             <p>{{ product.description }}</p>
             <div class="d-flex align-items-end mt-4">
-              <h3 class="text-black-50 text-decoration-line-through fs-6 me-3">
+              <h3 class="text-muted text-decoration-line-through fs-6 me-3">
                 NT$ {{ $filters.currency(product.origin_price) }}
               </h3>
-              <h3 class="text-org fw-bold fs-4">
+              <h3 class="text-black fw-bold fs-4">
                 NT$ {{ $filters.currency(product.price) }}
               </h3>
             </div>
@@ -69,7 +69,7 @@
               <button type="button" class="btn btn btn-dark btn-hover rounded-0 ms-4" @click="addtoCart(product.id, quantity)">加入購物車</button>
             </div>
             <hr class="mt-4">
-            <h4 class="text-primary fw-bold fs-5 mt-4">產品介紹</h4>
+            <h4 class="text-strong fw-bold fs-5 mt-4">產品介紹</h4>
             <ul class="lh-lg">
               <li>世界頂級的碳纖維車身，降低車身重量</li>
               <li>車身堅固並降低風阻，騎乘時不會有阻饒</li>
@@ -78,10 +78,10 @@
               <li>輕量化，操控得宜</li>
             </ul>
             <hr class="mt-4">
-            <h4 class="text-primary fw-bold fs-5 mt-4">購物須知</h4>
+            <h4 class="text-strong fw-bold fs-5 mt-4">購物須知</h4>
             <p class="lh-lg">商品下訂後3~7天組裝，組裝完後出貨時間為1~3天，商品運送時間為3~7天，一律採用黑貓寄送。</p>
             <hr class="mt-4">
-            <h4 class="text-primary fw-bold fs-5 mt-4">退換貨須知</h4>
+            <h4 class="text-strong fw-bold fs-5 mt-4">退換貨須知</h4>
             <p class="lh-lg">本產品不適用7天鑑賞期，若商品有瑕疵請聯絡客服，我們將提供專人到府服務。</p>
           </div>
         </div>
@@ -97,13 +97,13 @@
               <div class="card-body text-center">
                 <h4 class="card-title fw-bold">{{item.title}}</h4>
                 <div class="d-flex justify-content-around align-items-end">
-                  <div class="fs-6 text-black-50" v-if="!item.price">
+                  <div class="fs-6 text-muted" v-if="!item.price">
                     NT$ {{ $filters.currency(item.origin_price) }}
                   </div>
-                  <del class="fs-6 text-black-50" v-if="item.price">
+                  <del class="fs-6 text-muted" v-if="item.price">
                     NT$ {{ $filters.currency(item.origin_price) }}
                   </del>
-                  <div class="fs-5 text-org fw-bold" v-if="item.price">
+                  <div class="fs-5 text-black fw-bold" v-if="item.price">
                     NT$ {{ $filters.currency(item.price) }}
                   </div>
                 </div>
@@ -114,7 +114,7 @@
                   <i class="fas fa-star text-warning"></i>
                   <i class="fas fa-star text-warning"></i>
                   <i class="fas fa-star text-warning"></i>
-                  <i class="fas fa-star text-warning"></i>
+                  <i class="fas fa-star text-warning" v-if="Math.floor(Math.random() * 2) == 1"></i>
                 </div>
                 <small>已售出 {{ Math.floor(Math.random() * 150) }}</small>
               </div>
@@ -151,16 +151,17 @@ export default {
   },
   methods: {
     getProduct (id, text) {
-      console.log(text)
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`
+      this.isLoading = true
       if (text === 'hot') {
         this.$router.push(`/productPage/${id}`)
         this.getProduct(id)
       } else {
-        const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`
-        this.isLoading = true
         this.$http.get(api).then((response) => {
-          this.product = response.data.product
-          this.isLoading = false
+          if (response.data.success) {
+            this.product = response.data.product
+            this.isLoading = false
+          }
         })
         document.documentElement.scrollTop = 0
       }
@@ -169,13 +170,15 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        const tempProducts = new Set()
-        while (tempProducts.size < 5) {
-          this.random = this.getRandom(response.data.products.length)
-          tempProducts.add(response.data.products[this.random])
+        if (response.data.success) {
+          const tempProducts = new Set()
+          while (tempProducts.size < 5) {
+            this.random = this.getRandom(response.data.products.length)
+            tempProducts.add(response.data.products[this.random])
+          }
+          this.products = Array.from(tempProducts)
+          this.isLoading = false
         }
-        this.products = Array.from(tempProducts)
-        this.isLoading = false
       })
     },
     addtoCart (id, qty) {
@@ -211,15 +214,14 @@ export default {
       return Math.floor(Math.random() * x)
     },
     addFollow (id) {
+      this.isLoading = true
       const followId = this.followData.indexOf(id)
       if (followId === -1) {
         this.followData.push(id)
         this.emitter.emit('message:push', { message: '已加入收藏', status: 'success' })
-        this.isLoading = true
       } else {
         this.followData.splice(followId, 1)
         this.emitter.emit('message:push', { message: '已取消收藏', status: 'danger' })
-        this.isLoading = true
       }
       setTimeout(() => {
         this.isLoading = false

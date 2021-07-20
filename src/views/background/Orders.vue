@@ -1,7 +1,7 @@
 <template>
   <div class="orders mt-4">
-    <loading v-model:active="isLoading"/>
-    <div class="table-responsive-md mt-4">
+    <Loading v-model:active="isLoading"/>
+    <div class="table-responsive-lg mt-4">
       <table class="table table-striped lh-lg">
         <thead class="table-dark">
           <tr class="table-nowrap">
@@ -34,20 +34,20 @@
             </td>
             <td class="text-end">NT$ {{ $filters.currency(item.total) }}</td>
             <td>
-              <strong v-if="item.is_paid" class="text-org">已付款</strong>
-              <span v-else class="text-black-50">尚未付款</span>
+              <span v-if="item.is_paid" class="text-strong">已付款</span>
+              <span v-else class="text-muted">尚未付款</span>
             </td>
             <td>
               <button
                 type="button"
-                class="btn btn-dark btn-hover rounded-0 border-0 me-2"
+                class="btn btn-dark btn-hover rounded-0 me-2"
                 @click="openOrderModal(item)"
               >
                 查看詳細
               </button>
               <button
                 type="button"
-                class="btn btn-danger btn-hover rounded-0 border-0 "
+                class="btn btn-outline-dark btn-hover rounded-0"
                 @click="openDelModal(item)"
               >
                 刪除
@@ -64,10 +64,9 @@
         aria-labelledby="exampleModalLabel" aria-hidden="true" ref="orderModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title fw-bold" id="exampleModalLabel">訂單資訊 <span class="fs-6 text-black-50">( {{ tempOrder.id }} )</span></h4>
-            <button type="button" class="btn-close"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-header bg-dark text-white">
+            <h4 class="modal-title fw-bold" id="exampleModalLabel">訂單資訊 <span class="fs-6">( {{ tempOrder.id }} )</span></h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -116,7 +115,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-hover rounded-0 border-0" data-bs-dismiss="modal">關閉</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" data-bs-dismiss="modal">關閉</button>
           </div>
         </div>
       </div>
@@ -126,18 +125,18 @@
       aria-labelledby="exampleModalLabel" aria-hidden="true" ref="delOrderModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
-          <div class="modal-header bg-danger text-white">
+          <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
               <span>刪除訂單</span>
             </h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            是否刪除 <strong class="text-danger">{{ tempOrder.id }}</strong> 訂單(刪除後將無法恢復)。
+            是否刪除 <strong class="text-strong">{{ tempOrder.id }}</strong> 訂單(刪除後將無法恢復)。
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger btn-hover rounded-0 border-0" @click="delCoupon">確認刪除</button>
+            <button type="button" class="btn btn-outline-dark btn-hover rounded-0" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" @click="delOrder">確認刪除</button>
           </div>
         </div>
       </div>
@@ -179,14 +178,16 @@ export default {
         }
       })
     },
-    delCoupon () {
+    delOrder () {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${this.tempOrder.id}`
       this.isLoading = true
       this.$http.delete(api).then((response) => {
-        this.emitter.emit('message:push', { message: response.data.message, status: 'danger' })
-        this.getOrders()
-        this.delOrderModal.hide()
-        this.isLoading = false
+        if (response.data.success) {
+          this.emitter.emit('message:push', { message: response.data.message, status: 'danger' })
+          this.getOrders()
+          this.delOrderModal.hide()
+          this.isLoading = false
+        }
       })
     },
     openOrderModal (item) {

@@ -2,10 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/'
-  },
-  {
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue')
@@ -23,27 +19,27 @@ const routes = [
       {
         path: 'all',
         name: 'AllBike',
-        component: () => import('../views/foreground/productsPage/allBike.vue')
+        component: () => import('../views/foreground/productsPage/AllBike.vue')
       },
       {
         path: 'city',
         name: 'CityBike',
-        component: () => import('../views/foreground/productsPage/cityBike.vue')
+        component: () => import('../views/foreground/productsPage/CityBike.vue')
       },
       {
         path: 'electric',
         name: 'ElectricBike',
-        component: () => import('../views/foreground/productsPage/electricBike.vue')
+        component: () => import('../views/foreground/productsPage/ElectricBike.vue')
       },
       {
         path: 'mountain',
         name: 'MountainBike',
-        component: () => import('../views/foreground/productsPage/mountainBike.vue')
+        component: () => import('../views/foreground/productsPage/MountainBike.vue')
       },
       {
         path: 'road',
         name: 'RoadBike',
-        component: () => import('../views/foreground/productsPage/roadBike.vue')
+        component: () => import('../views/foreground/productsPage/RoadBike.vue')
       }
     ]
   },
@@ -109,6 +105,10 @@ const routes = [
         component: () => import('../views/background/Coupons.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/'
   }
 ]
 

@@ -3,14 +3,14 @@
   <GoTop/>
   <Banner/>
   <div class="CheckOrder mt-5">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="container">
       <h1 class="fs-2 text-center fw-bold">訂單查詢</h1>
       <div class="row d-flex justify-content-center">
         <div class="col-md-8">
-          <div class="input-group mt-4 mb-1">
+          <div class="input-group mt-5 mb-1">
             <input type="text" class="form-control" placeholder="輸入訂單編號" v-model="orderId">
-            <button class="btn btn-dark btn-hover rounded-0 border-0" type="button" @click="getOrder">送出</button>
+            <button class="btn btn-dark btn-hover rounded-0" type="button" @click="getOrder">送出</button>
           </div>
           <span class="text-success" v-if="statusGet">*取得此訂單</span>
           <span class="text-danger" v-if="statusNotGet">*查無此訂單</span>
@@ -57,7 +57,7 @@
                   </tr>
                   <tr class="table-nowrap">
                     <td width="100" class="fw-bold text-end">付款狀態 :</td>
-                    <td><span v-if="!order.is_paid">尚未付款</span><span v-if="order.is_paid" class="text-org">付款完成</span></td>
+                    <td><span v-if="!order.is_paid">尚未付款</span><span v-if="order.is_paid" class="text-strong">付款完成</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -128,14 +128,12 @@ export default {
         if (response.data.order) {
           this.statusGet = true
           this.statusNotGet = false
-          // this.emitter.emit('message:push', { message: '取得此訂單', status: 'success' })
           this.order = response.data.order
           this.isLoading = false
         } else {
           this.order = { user: {} }
           this.statusNotGet = true
           this.statusGet = false
-          // this.emitter.emit('message:push', { message: '查無此訂單', status: 'danger' })
           this.isLoading = false
         }
       })
@@ -143,3 +141,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.CheckOrder{
+  min-height: calc(100vh - 550px);
+}
+</style>

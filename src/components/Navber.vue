@@ -1,6 +1,6 @@
 <template>
   <div class="nav" >
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <nav
       class="navbar navbar-expand-lg navbar-light bg-light text-dark fixed-top"
     >
@@ -24,15 +24,14 @@
             <i class="fas fa-user-circle"></i>
           </a>
           <!-- 購物車按鈕 -->
-          <a class="navbar-brand text-dark me-0 a-hover cart" href="#" data-bs-toggle="dropdown">
+          <a class="navbar-brand text-dark me-0 a-hover cart" href="#" @click.prevent="" data-bs-toggle="dropdown">
             <i class="fas fa-shopping-cart"></i>
             <span class="badge text-light bg-danger">{{ carts.length }}</span>
           </a>
           <div
-            class="dropdown-menu dropdown-menu-end p-3 me-3"
-            style="min-width: 340px"
+            class="dropdown-menu dropdown-menu-end cart-box p-3 me-3"
           >
-            <h5 class="fw-bold">已選購商品</h5>
+            <h5 class="fw-bold" v-if="carts.length>0">已選購商品</h5>
             <div class="table-responsive-md">
               <table class="table table-sm">
                 <thead class="table-dark">
@@ -57,9 +56,13 @@
                 </tbody>
               </table>
             </div>
+            <h5 class="fw-bold text-center mb-3" v-if="carts.length==0">產品尚未加入購物車!</h5>
             <div class="d-flex justify-content-end">
-              <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" @click="goCart">
+              <button type="button" class="btn btn-dark btn-hover rounded-0" @click="goCart" v-if="carts.length>0">
                 <i class="fas fa-shopping-cart"></i> 結帳去
+              </button>
+              <button type="button" class="btn btn-dark btn-hover rounded-0" @click="goProducts" v-else>
+                <i class="fas fa-shopping-basket"></i> 選購去
               </button>
             </div>
           </div>
@@ -85,15 +88,14 @@
             <i class="fas fa-user-circle"></i>
           </a>
           <!-- 購物車按鈕 -->
-          <a class="navbar-brand text-dark me-0 a-hover cart" href="#" data-bs-toggle="dropdown">
+          <a class="navbar-brand text-dark me-0 a-hover cart" href="#" @click.prevent="" data-bs-toggle="dropdown">
             <i class="fas fa-shopping-cart"></i>
-            <span class="badge text-light bg-danger">{{ carts.length }}</span>
+            <span class="badge text-light bg-danger" v-if="carts.length>0">{{ carts.length }}</span>
           </a>
           <div
-            class="dropdown-menu dropdown-menu-end p-3 me-3"
-            style="min-width: 340px"
+            class="dropdown-menu dropdown-menu-end cart-box p-3 me-3"
           >
-            <h5 class="fw-bold">已選購商品</h5>
+            <h5 class="fw-bold" v-if="carts.length>0">已選購商品</h5>
             <div class="table-responsive-md">
               <table class="table table-sm">
                 <thead class="table-dark">
@@ -105,11 +107,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="table-nowrap" v-for="item in carts" :key="item.id">
+                  <tr class="table-nowrap text-center" v-for="item in carts" :key="item.id">
                     <td>{{ item.product.title }}</td>
-                    <td class="text-center">{{ item.qty }}</td>
+                    <td>{{ item.qty }}</td>
                     <td class="text-end">NT$ {{ $filters.currency(item.total) }}</td>
-                    <td class="text-center">
+                    <td>
                       <a href="#" @click.prevent="delCart(item.id)">
                         <i class="fas fa-trash-alt text-danger"></i>
                       </a>
@@ -118,9 +120,13 @@
                 </tbody>
               </table>
             </div>
+            <h5 class="fw-bold text-center mb-3" v-if="carts.length==0">產品尚未加入購物車!</h5>
             <div class="d-flex justify-content-end">
-              <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" @click="goCart">
+              <button type="button" class="btn btn-dark btn-hover rounded-0" @click="goCart" v-if="carts.length>0">
                 <i class="fas fa-shopping-cart"></i> 結帳去
+              </button>
+              <button type="button" class="btn btn-dark btn-hover rounded-0" @click="goProducts" v-else>
+                <i class="fas fa-shopping-basket"></i> 選購去
               </button>
             </div>
           </div>
@@ -166,6 +172,9 @@ export default {
     },
     goCart () {
       this.$router.push('/cart')
+    },
+    goProducts () {
+      this.$router.push('/products/all')
     }
   },
   created () {
@@ -189,7 +198,15 @@ export default {
   border-radius: 50%;
 }
 .cart>span{
-  font-size: 10px;
+  font-size: 8px;
   padding: 4px 6px;
+}
+.cart-box{
+  min-width: 450px;
+}
+@media (max-width: 768px) {
+  .cart-box{
+    min-width: 340px;
+  }
 }
 </style>

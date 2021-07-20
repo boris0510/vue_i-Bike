@@ -4,8 +4,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 // 讀取效果
-import Loading from 'vue-loading-overlay'
-import 'vue-loading-overlay/dist/vue-loading.css'
+import Loading from 'vue3-loading-overlay'
+import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
 // 表單驗證
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
@@ -58,8 +58,7 @@ router.beforeEach((to, from, next) => {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)Token\s*=\s*([^;]*).*$)|^.*$/, '$1')
     axios.defaults.headers.common.Authorization = token
     axios.post(api).then((response) => {
-      // console.log('驗證登入', response.data)
-      if (response.data.success && response.data.uid === 'VEcqOvDq3INA4KvivyJTeHOtUd43') {
+      if (response.data.success) {
         next()
       } else {
         emitter.emit('message:push', { message: '請登入帳號', status: 'danger' })

@@ -1,7 +1,7 @@
 # vue_i-Bike
 
 # Demo
-https://borong-huang.github.io/vue_i-Bike/#/
+https://boris0510.github.io/vue_i-Bike/#/
 
 ## Project setup
 ```

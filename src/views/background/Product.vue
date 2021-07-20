@@ -1,10 +1,10 @@
 <template>
   <div class="product mt-4">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="text-end">
-      <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" @click="openModal(true)">建立新產品</button>
+      <button type="button" class="btn btn-dark btn-hover rounded-0" @click="openModal(true)">建立新產品</button>
     </div>
-    <div class="table-responsive-md mt-4">
+    <div class="table-responsive-lg mt-4">
       <table class="table table-striped lh-lg">
         <thead class="table-dark">
           <tr class="table-nowrap">
@@ -27,20 +27,20 @@
               NT$ {{ $filters.currency(item.price) }} 元
             </td>
             <td class="text-center">
-              <span v-if="item.is_enabled" class="text-success">啟用</span>
+              <span v-if="item.is_enabled" class="text-strong">啟用</span>
               <span v-else class="text-muted">未啟用</span>
             </td>
             <td class="text-center">
               <button
                 type="button"
-                class="btn btn-dark btn-hover rounded-0 border-0 me-2"
+                class="btn btn-dark btn-hover rounded-0 me-2"
                 @click="openModal(false, item)"
               >
                 編輯
               </button>
               <button
                 type="button"
-                class="btn btn-danger btn-hover rounded-0 border-0"
+                class="btn btn-outline-dark btn-hover rounded-0"
                 @click="openDelModal(item)"
               >
                 刪除
@@ -79,8 +79,7 @@
                   <input type="file" id="customFile" class="form-control"
                     ref="files" @change="uploadFile">
                 </div>
-                <img img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
-                  class="img-fluid" alt="" :src="tempProduct.imageUrl">
+                <img class="img-fluid" alt="商品照片" :src="tempProduct.imageUrl" v-if="tempProduct.imageUrl">
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
@@ -88,7 +87,6 @@
                   <input type="text" class="form-control" id="title"
                     placeholder="請輸入標題" v-model="tempProduct.title">
                 </div>
-
                 <div class="row mt-3">
                   <div class="form-group col-md-6">
                     <label for="category">分類</label>
@@ -138,29 +136,29 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-hover rounded-0 border-0" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" @click="updateProduct">確認</button>
+            <button type="button" class="btn btn-outline-dark btn-hover rounded-0" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" @click="updateProduct">確認</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- 刪除 Modal -->
+    <!-- DelProductModal -->
     <div class="modal fade" id="delProductModal" tabindex="-1" role="dialog"
       aria-labelledby="exampleModalLabel" aria-hidden="true" ref="delModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
-          <div class="modal-header bg-danger text-white">
+          <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
               <span>刪除產品</span>
             </h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            是否刪除 <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
+            是否刪除 <strong class="text-strong">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger btn-hover rounded-0 border-0" @click="delProdict">確認刪除</button>
+            <button type="button" class="btn btn-outline-dark btn-hover rounded-0" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" @click="delProdict">確認刪除</button>
           </div>
         </div>
       </div>
@@ -196,9 +194,11 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        this.isLoading = false
-        this.products = response.data.products
-        this.pagination = response.data.pagination
+        if (response.data.success) {
+          this.products = response.data.products
+          this.pagination = response.data.pagination
+          this.isLoading = false
+        }
       })
     },
     updateProduct () {

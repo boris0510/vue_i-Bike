@@ -1,12 +1,12 @@
 <template>
   <div class="coupons mt-4">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="text-end">
-      <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" @click="openCouponModal(true)">
+      <button type="button" class="btn btn-dark btn-hover rounded-0" @click="openCouponModal(true)">
         建立優惠券
       </button>
     </div>
-    <div class="table-responsive-md mt-4">
+    <div class="table-responsive-lg mt-4">
       <table class="table table-striped lh-lg">
         <thead class="table-dark">
           <tr class="table-nowrap">
@@ -25,20 +25,20 @@
             <td>{{ item.percent }}%</td>
             <td>{{ $filters.date(item.due_date) }}</td>
             <td>
-              <span v-if="item.is_enabled === 1" class="text-org">啟用</span>
+              <span v-if="item.is_enabled === 1" class="text-strong">啟用</span>
               <span v-else class="text-dark-50">未起用</span>
             </td>
             <td>
               <button
                 type="button"
-                class="btn btn-dark btn-hover rounded-0 border-0 me-2"
+                class="btn btn-dark btn-hover rounded-0 me-2"
                 @click="openCouponModal(false, item)"
               >
                 編輯
               </button>
               <button
                 type="button"
-                class="btn btn-danger btn-hover rounded-0 border-0"
+                class="btn btn-outline-dark btn-hover rounded-0"
                 @click="openDelModal(item)"
               >
                 刪除
@@ -55,11 +55,10 @@
         aria-labelledby="exampleModalLabel" aria-hidden="true" ref="couponModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header bg-dark text-white">
             <h4 class="modal-title fw-bold" id="exampleModalLabel" v-if="isNew">新增優惠碼</h4>
             <h4 class="modal-title fw-bold" id="exampleModalLabel" v-if="!isNew">更新優惠碼</h4>
-            <button type="button" class="btn-close"
-                    data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -95,11 +94,11 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-hover rounded-0 border-0" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" v-if="isNew"
+            <button type="button" class="btn btn-outline-dark btn-hover rounded-0" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" v-if="isNew"
                     @click="updateCoupon">新增優惠券
             </button>
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" v-if="!isNew"
+            <button type="button" class="btn btn-dark btn-hover rounded-0" v-if="!isNew"
                     @click="updateCoupon">更新優惠券
             </button>
           </div>
@@ -111,18 +110,18 @@
       aria-labelledby="exampleModalLabel" aria-hidden="true" ref="delCouponModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
-          <div class="modal-header bg-danger text-white">
+          <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
               <span>刪除優惠碼</span>
             </h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            是否刪除 <strong class="text-danger">{{ tempCoupon.title }}</strong> 優惠碼(刪除後將無法恢復)。
+            是否刪除 <strong class="text-strong">{{ tempCoupon.title }}</strong> 優惠碼(刪除後將無法恢復)。
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" data-bs-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-danger btn-hover rounded-0 border-0" @click="delCoupon">確認刪除</button>
+            <button type="button" class="btn btn-outline-dark btn-hover rounded-0" data-bs-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" @click="delCoupon">確認刪除</button>
           </div>
         </div>
       </div>
@@ -168,9 +167,11 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        this.coupons = response.data.coupons
-        this.pagination = response.data.pagination
-        this.isLoading = false
+        if (response.data.success) {
+          this.coupons = response.data.coupons
+          this.pagination = response.data.pagination
+          this.isLoading = false
+        }
       })
     },
     updateCoupon () {
@@ -178,20 +179,24 @@ export default {
         const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon`
         this.isLoading = true
         this.$http.post(api, { data: this.tempCoupon }).then((response) => {
-          this.emitter.emit('message:push', { message: response.data.message, status: 'success' })
-          this.getCoupons(this.pagination.current_page)
-          this.couponModal.hide()
-          this.isLoading = false
+          if (response.data.success) {
+            this.emitter.emit('message:push', { message: response.data.message, status: 'success' })
+            this.getCoupons(this.pagination.current_page)
+            this.couponModal.hide()
+            this.isLoading = false
+          }
         })
       } else {
         const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
         this.isLoading = true
         this.due_date = new Date(this.tempCoupon.due_date * 1000)
         this.$http.put(api, { data: this.tempCoupon }).then((response) => {
-          this.emitter.emit('message:push', { message: response.data.message, status: 'success' })
-          this.getCoupons()
-          this.couponModal.hide()
-          this.isLoading = false
+          if (response.data.success) {
+            this.emitter.emit('message:push', { message: response.data.message, status: 'success' })
+            this.getCoupons()
+            this.couponModal.hide()
+            this.isLoading = false
+          }
         })
       }
     },
@@ -199,10 +204,12 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
       this.isLoading = true
       this.$http.delete(api).then((response) => {
-        this.emitter.emit('message:push', { message: response.data.message, status: 'danger' })
-        this.getCoupons()
-        this.delCouponModal.hide()
-        this.isLoading = false
+        if (response.data.success) {
+          this.emitter.emit('message:push', { message: response.data.message, status: 'danger' })
+          this.getCoupons()
+          this.delCouponModal.hide()
+          this.isLoading = false
+        }
       })
     },
     openCouponModal (isNew, item) {

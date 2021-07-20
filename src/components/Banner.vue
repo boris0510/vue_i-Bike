@@ -18,7 +18,7 @@
           <div class="content">
             <p class="fs-1">挑戰自己創造極限</p>
             <p class="fs-3">2021 新品上市</p>
-            <a href="#/products/all" class="btn btn-dark btn-hover rounded-0 border-0">了解更多</a>
+            <a href="#/products/all" class="btn btn-dark btn-hover rounded-0">了解更多</a>
           </div>
         </div>
       </swiper-slide>
@@ -27,7 +27,7 @@
           <div class="content">
             <p class="fs-1">嚴格品質檢驗關卡</p>
             <p class="fs-3">把關產品組裝品質</p>
-            <a href="#/about" class="btn btn-dark btn-hover rounded-0 border-0">了解更多</a>
+            <a href="#/about" class="btn btn-dark btn-hover rounded-0">了解更多</a>
           </div>
         </div>
       </swiper-slide>
@@ -36,7 +36,7 @@
           <div class="content">
             <p class="fs-1">創造健康的新生活</p>
             <p class="fs-3">讓運動成為好夥伴</p>
-            <a href="#/products/all" class="btn btn-dark btn-hover rounded-0 border-0">了解更多</a>
+            <a href="#/products/all" class="btn btn-dark btn-hover rounded-0">了解更多</a>
           </div>
         </div>
       </swiper-slide>
@@ -82,7 +82,7 @@ export default {
 .img-bg{
   background-size: cover;
   background-position: center center;
-  min-height: 600px;
+  min-height: 500px;
 }
 
 @media (max-width: 768px) {
@@ -94,7 +94,7 @@ export default {
 .content{
   color: #FFF;
   position: relative;
-  top: 200px;
+  top: 150px;
   left: 230px;
 }
 .content p{

@@ -1,6 +1,6 @@
 <template>
-  <div class="all">
-    <loading v-model:active="isLoading"/>
+  <div class="mountainBike mt-3">
+    <Loading v-model:active="isLoading"/>
     <!-- 商品內容 -->
     <div class="container px-0">
       <div class="row row-cols-1 row-cols-md-5 g-3">
@@ -11,13 +11,13 @@
             <div class="card-body text-center">
               <h4 class="card-title fw-bold">{{item.title}}</h4>
               <div class="d-flex justify-content-around align-items-end">
-                <div class="fs-6 text-black-50" v-if="!item.price">
+                <div class="fs-6 text-muted" v-if="!item.price">
                   NT$ {{ $filters.currency(item.origin_price) }}
                 </div>
-                <del class="fs-6 text-black-50" v-if="item.price">
+                <del class="fs-6 text-muted" v-if="item.price">
                   NT$ {{ $filters.currency(item.origin_price) }}
                 </del>
-                <div class="fs-5 text-org fw-bold" v-if="item.price">
+                <div class="fs-5 text-black fw-bold" v-if="item.price">
                   NT$ {{ $filters.currency(item.price) }}
                 </div>
               </div>
@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: 'mountain',
+  name: 'MountainBike',
   data () {
     return {
       isLoading: false,
@@ -53,12 +53,14 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`
       this.isLoading = true
       this.$http.get(api).then((response) => {
-        response.data.products.forEach((item) => {
-          if (item.category === '登山車') {
-            this.products.push(item)
-          }
-        })
-        this.isLoading = false
+        if (response.data.success) {
+          response.data.products.forEach((item) => {
+            if (item.category === '登山車') {
+              this.products.push(item)
+            }
+          })
+          this.isLoading = false
+        }
       })
       document.documentElement.scrollTop = 0
     },

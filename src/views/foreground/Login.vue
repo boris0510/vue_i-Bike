@@ -2,7 +2,7 @@
   <Navber/>
   <Banner/>
   <div class="login mt-5">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <main class="form-signin">
       <Form v-slot="{ errors }" @submit="signin">
         <h1 class="h2 mb-4 text-center fw-bold">登入至後台</h1>
@@ -17,7 +17,7 @@
             <input type="checkbox" value="remember-me"> 記住我
           </label>
         </div>
-        <button class="w-100 btn btn-lg btn-dark btn-hover mb-3 rounded-0 border-0" type="submit">登入</button>
+        <button class="w-100 btn btn-lg btn-dark btn-hover mb-3 rounded-0" type="submit">登入</button>
       </Form>
       <p class="text-center">使用 ibike@gmail.com 及 ibike123 登入</p>
     </main>
@@ -51,15 +51,11 @@ export default {
       const api = `${process.env.VUE_APP_API}/admin/signin`
       this.$http.post(api, this.user).then((response) => {
         if (response.data.success) {
-          if (response.data.uid === 'VEcqOvDq3INA4KvivyJTeHOtUd43') {
-            const token = response.data.token
-            const expired = response.data.expired
-            document.cookie = `Token=${token};expires=${new Date(expired)};`
-            this.$router.push('/admin/product')
-            this.emitter.emit('message:push', { message: response.data.message, status: 'success' })
-          } else {
-            this.emitter.emit('message:push', { message: '請使用ibike帳號', status: 'danger' })
-          }
+          const token = response.data.token
+          const expired = response.data.expired
+          document.cookie = `Token=${token};expires=${new Date(expired)};`
+          this.$router.push('/admin/product')
+          this.emitter.emit('message:push', { message: response.data.message, status: 'success' })
         } else {
           this.emitter.emit('message:push', { message: response.data.message, status: 'danger' })
         }
@@ -70,6 +66,9 @@ export default {
 </script>
 
 <style scoped>
+.login{
+  min-height: calc(100vh - 550px);
+}
 .form-signin {
   width: 100%;
   max-width: 340px;

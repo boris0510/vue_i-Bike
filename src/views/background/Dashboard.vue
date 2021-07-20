@@ -15,9 +15,9 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <ul class="navbar-nav px-3 d-none d-lg-block">
+      <ul class="navbar-nav px-3 d-none d-md-block">
         <li class="nav-item text-nowrap">
-          <button type="button" class="btn btn-dark btn-hover rounded-0 border-0 fw-bold" @click="signout">登出</button>
+          <button type="button" class="btn btn-dark btn-hover rounded-0 fw-bold" @click="signout">登出</button>
         </li>
       </ul>
     </header>
@@ -59,16 +59,15 @@
                 </a>
               </li>
             </ul>
-            <ul class="navbar-nav px-4 mt-2 mb-3 d-lg-none d-md-block">
+            <ul class="navbar-nav px-4 mt-2 mb-3 d-md-none d-md-block">
               <li class="nav-item text-nowrap">
-                <a class="nav-link text-light fw-bold a-hover fs-4" href="#">登出</a>
+                <a class="nav-link text-light fw-bold a-hover fs-4" href="#" @click="signout">登出</a>
               </li>
             </ul>
           </div>
         </nav>
-
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <router-view></router-view>
+          <Router-view/>
         </main>
       </div>
     </div>

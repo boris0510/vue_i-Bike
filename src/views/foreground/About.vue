@@ -3,7 +3,7 @@
   <GoTop/>
   <Banner/>
   <div class="about mt-5">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="container">
       <section>
         <div class="d-flex justify-content-center">
@@ -11,7 +11,7 @@
         </div>
         <div class="row d-flex align-items-center mt-5">
           <div class="col-md-6">
-            <img src="https://images.unsplash.com/photo-1605050825077-289f85b6cf43?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="" class="img-fluid">
+            <img src="https://images.unsplash.com/photo-1605050825077-289f85b6cf43?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="關於i-Bike" class="img-fluid px-5">
           </div>
           <div class="col-md-6 mt-3">
             <p class="fs-5 lh-lg">
@@ -50,17 +50,17 @@
               <h2 class="text-center fw-bold mb-4">提供寶貴意見</h2>
               <Form class="row g-3 needs-validation" v-slot="{ errors }" @submit="submitFrom">
                 <div class="col-md-12">
-                  <label for="name" class="form-label">姓名 :</label>
+                  <label for="name" class="form-label">姓名 <small>(必填)</small></label>
                   <Field type="text" class="form-control"  name="姓名" id="name" :class="{ 'is-invalid': errors['姓名'] }" placeholder="請輸入姓名" rules="required"></Field>
                   <ErrorMessage name="姓名" class="invalid-feedback"></ErrorMessage>
                 </div>
                 <div class="col-md-12">
-                  <label for="email" class="form-label">電子郵件 :</label>
+                  <label for="email" class="form-label">電子郵件 <small>(必填)</small></label>
                   <Field type="email" class="form-control" id="email" name="Email" :class="{ 'is-invalid': errors['Email'] }" placeholder="請輸入電子郵件" rules="email|required"></Field>
                   <ErrorMessage name="Email" class="invalid-feedback"></ErrorMessage>
                 </div>
                 <div class="col-md-12">
-                  <label for="phone" class="form-label">電話 :</label>
+                  <label for="phone" class="form-label">電話 <small>(必填)</small></label>
                   <Field type="number" class="form-control" :class="{ 'is-invalid': errors['電話'] }" name="電話" id="phone" placeholder="請輸入電話" rules="required"></Field>
                   <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
                 </div>
@@ -74,7 +74,7 @@
                   </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end">
-                  <button class="btn btn-dark btn-hover rounded-0 border-0" type="submit">送出</button>
+                  <button class="btn btn-dark btn-hover rounded-0" type="submit">送出</button>
                 </div>
               </Form>
             </div>
@@ -103,10 +103,6 @@ export default {
   data () {
     return {
       isLoading: false
-    }
-  },
-  methods: {
-    submitFrom () {
     }
   }
 }

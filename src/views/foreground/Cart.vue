@@ -2,7 +2,7 @@
   <Navber/>
   <GoTop/>
   <div class="cart">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="container">
       <div class="d-flex justify-content-center">
         <h1 class="fs-2 fw-bold">購物車清單</h1>
@@ -36,7 +36,7 @@
                   </div>
                 </div>
               </td>
-              <td class="text-end">NT$ {{ $filters.currency(item.final_total) }} 元 <br> <small class="text-org" v-if="item.final_total !== item.total">( 已套用優惠碼 )</small></td>
+              <td class="text-end">NT$ {{ $filters.currency(item.final_total) }} 元 <br> <small class="text-strong" v-if="item.final_total !== item.total">( 已套用優惠碼 )</small></td>
             </tr>
           </tbody>
           <tfoot class="text-center">
@@ -45,8 +45,8 @@
               <td class="text-end">NT$ {{ $filters.currency(total) }} 元</td>
             </tr>
             <tr v-if="final_total !== total">
-              <td colspan="4" class="text-end text-org">折扣價 :</td>
-              <td class="text-org text-end">NT$ {{ $filters.currency(final_total) }} 元</td>
+              <td colspan="4" class="text-end text-strong">折扣價 :</td>
+              <td class="text-strong text-end">NT$ {{ $filters.currency(final_total) }} 元</td>
             </tr>
             </tfoot>
         </table>
@@ -61,12 +61,12 @@
         </div>
       </div>
       <div class="d-flex justify-content-between mt-5" v-if="carts.length !== 0">
-        <button type="button" class="btn btn-secondary btn-hover rounded-0 border-0" @click="goProducts">回商品列表</button>
-        <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" @click="goCheckout">下一步 填寫資料</button>
+        <button type="button" class="btn btn-outline-dark btn-hover rounded-0" @click="goProducts">回商品列表</button>
+        <button type="button" class="btn btn-dark btn-hover rounded-0" @click="goCheckout">下一步 填寫資料</button>
       </div>
       <div class="text-center pt-4" v-if="carts.length === 0">
         <h3 class="fw-bold">購物車還沒有任何商品，趕快挑選產品加入購物車 !</h3>
-        <button type="button" class="btn btn-dark btn-hover rounded-0 border-0 mt-5" @click="goProducts">查看產品 Go</button>
+        <button type="button" class="btn btn-dark btn-hover rounded-0 mt-5" @click="goProducts">查看產品 Go</button>
       </div>
     </div>
   </div>
@@ -178,6 +178,6 @@ export default {
 <style scoped>
 .cart{
   margin-top: 100px;
-  min-height: calc(70vh);
+  min-height: calc(100vh - 250px);
 }
 </style>

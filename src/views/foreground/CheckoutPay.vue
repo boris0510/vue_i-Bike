@@ -2,7 +2,7 @@
   <Navber/>
   <GoTop/>
   <div class="checkoutPay">
-    <loading v-model:active="isLoading"/>
+    <Loading v-model:active="isLoading"/>
     <div class="container">
       <div class="d-flex justify-content-center align-items-center mb-5">
         <h5 class="fw-bold mb-0 text-black-50">填寫資料</h5>
@@ -73,14 +73,14 @@
                 </tr>
                 <tr class="table-nowrap">
                   <td width="100" class="fw-bold text-end">付款狀態 :</td>
-                  <td><span v-if="!order.is_paid">尚未付款</span><span v-if="order.is_paid" class="text-org">付款完成</span></td>
+                  <td><span v-if="!order.is_paid">尚未付款</span><span v-if="order.is_paid" class="text-strong">付款完成</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div class="d-flex justify-content-center mt-3 mt-md-5">
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" v-if="!order.is_paid" @click="pay()">確認付款</button>
-            <button type="button" class="btn btn-dark btn-hover rounded-0 border-0" v-if="order.is_paid" @click="goProducts()">繼續逛逛</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" v-if="!order.is_paid" @click="pay()">確認付款</button>
+            <button type="button" class="btn btn-dark btn-hover rounded-0" v-if="order.is_paid" @click="goProducts()">繼續逛逛</button>
           </div>
         </div>
       </div>
