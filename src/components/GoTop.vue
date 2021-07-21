@@ -11,18 +11,20 @@ export default {
     top () {
       document.documentElement.scrollTop = 0
     }
-  }
-}
-window.onscroll = function (event) {
-  if (event.target.scrollingElement.scrollTop > 250) {
-    const el = document.querySelector('.gotop')
-    if (el !== null) {
-      el.className = 'gotop d-block'
-    }
-  } else {
-    const el = document.querySelector('.gotop')
-    if (el !== null) {
-      el.className = 'gotop d-none'
+  },
+  mounted () {
+    window.onscroll = function (event) {
+      if (event.target.scrollingElement.scrollTop > 250) {
+        const el = document.querySelector('.gotop')
+        if (el !== null) {
+          el.className = 'gotop d-block'
+        }
+      } else {
+        const el = document.querySelector('.gotop')
+        if (el !== null) {
+          el.className = 'gotop d-none'
+        }
+      }
     }
   }
 }
