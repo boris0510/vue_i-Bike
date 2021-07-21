@@ -95,7 +95,7 @@
               <div style="height: 250px; background-size: cover; background-position: center" :style="{ backgroundImage: `url(${item. imageUrl})` }">
               </div>
               <div class="card-body text-center">
-                <h4 class="card-title fw-bold">{{item.title}}</h4>
+                <h4 class="card-title fw-bold">{{ item.title }}</h4>
                 <div class="d-flex justify-content-around align-items-end">
                   <div class="fs-6 text-muted" v-if="!item.price">
                     NT$ {{ $filters.currency(item.origin_price) }}
