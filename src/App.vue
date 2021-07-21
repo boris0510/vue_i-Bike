@@ -1,7 +1,7 @@
 <template>
   <Alert />
   <div class="app">
-    <Router-view />
+    <RouterView />
   </div>
 </template>
 

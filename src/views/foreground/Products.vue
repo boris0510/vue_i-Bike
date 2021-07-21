@@ -51,7 +51,7 @@
             </div>
           </div>
         </div>
-        <Router-view/>
+        <RouterView/>
       </div>
     </div>
   </div>
