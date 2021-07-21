@@ -1,7 +1,7 @@
 <template>
   <div class="allBike mt-3">
     <Loading v-model:active="isLoading"/>
-    <!-- 商品內容 -->
+    <!-- 商品 -->
     <div class="container px-0">
       <div class="row row-cols-1 row-cols-md-5 g-3">
         <div class="col" v-for="item in products" :key="item.id">

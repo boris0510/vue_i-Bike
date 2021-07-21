@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'Alert',
+  name: 'AlertMessage',
   data () {
     return {
       messages: []

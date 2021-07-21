@@ -64,7 +64,7 @@ import Footer from '@/components/Footer.vue'
 import GoTop from '@/components/GoTop.vue'
 
 export default {
-  name: 'products',
+  name: 'Products',
   components: {
     Navber,
     Footer,

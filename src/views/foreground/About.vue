@@ -93,7 +93,7 @@ import Footer from '@/components/Footer.vue'
 import GoTop from '@/components/GoTop.vue'
 
 export default {
-  name: 'about',
+  name: 'About',
   components: {
     Navber,
     Banner,

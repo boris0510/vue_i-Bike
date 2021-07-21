@@ -134,7 +134,7 @@ import Modal from 'bootstrap/js/dist/modal.js'
 import Pagination from '@/components/Pagination.vue'
 
 export default {
-  name: 'Coupon',
+  name: 'Coupons',
   components: {
     Pagination
   },
