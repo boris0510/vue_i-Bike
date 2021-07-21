@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <swiper
+    <Swiper
       :spaceBetween="0"
       :centeredSlides="true"
       :pagination="{
@@ -13,7 +13,7 @@
       :navigation="false"
       class="mySwiper"
     >
-      <swiper-slide>
+      <SwiperSlide>
         <div class="img-bg" style="background-image: url('https://upload.cc/i1/2021/06/23/pUrVjt.jpg');">
           <div class="content">
             <p class="fs-1">挑戰自己創造極限</p>
@@ -21,8 +21,8 @@
             <a href="#/products/all" class="btn btn-dark btn-hover rounded-0">了解更多</a>
           </div>
         </div>
-      </swiper-slide>
-      <swiper-slide>
+      </SwiperSlide>
+      <SwiperSlide>
         <div class="img-bg" style="background-image: url('https://upload.cc/i1/2021/06/23/8fXSZ7.jpg');">
           <div class="content">
             <p class="fs-1">嚴格品質檢驗關卡</p>
@@ -30,8 +30,8 @@
             <a href="#/about" class="btn btn-dark btn-hover rounded-0">了解更多</a>
           </div>
         </div>
-      </swiper-slide>
-      <swiper-slide>
+      </SwiperSlide>
+      <SwiperSlide>
         <div class="img-bg" style="background-image: url('https://upload.cc/i1/2021/05/12/Kumk6L.jpg');">
           <div class="content">
             <p class="fs-1">創造健康的新生活</p>
@@ -39,8 +39,8 @@
             <a href="#/products/all" class="btn btn-dark btn-hover rounded-0">了解更多</a>
           </div>
         </div>
-      </swiper-slide>
-    </swiper>
+      </SwiperSlide>
+    </Swiper>
   </div>
 </template>
 
@@ -71,12 +71,6 @@ export default {
 <style scoped>
 .banner{
   margin-top: 60px;
-}
-
-.swiper-slide {
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
 }
 
 .img-bg{
