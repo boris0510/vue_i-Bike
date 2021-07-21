@@ -2,7 +2,7 @@
   <div class="message-alert">
     <div
       class="alert alert-strong alert-dismissible rounded-0 border-0"
-      :class="'text-' + item.status"
+      :class="`text-${item.status}`"
       v-for="(item, i) in messages"
       :key="i"
     >
