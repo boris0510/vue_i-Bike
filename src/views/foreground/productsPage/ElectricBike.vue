@@ -30,7 +30,7 @@
                 <i class="fas fa-star text-warning"></i>
                 <i class="fas fa-star text-warning"></i>
               </div>
-              <small>已售出 99</small>
+              <small>已售出 {{ Math.floor(Math.random() * 150) }}</small>
             </div>
           </div>
         </div>

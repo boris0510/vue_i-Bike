@@ -57,7 +57,7 @@
                   </tr>
                   <tr class="table-nowrap">
                     <td width="100" class="fw-bold text-end">付款狀態 :</td>
-                    <td><span v-if="!order.is_paid">尚未付款</span><span v-if="order.is_paid" class="text-strong">付款完成</span></td>
+                    <td><span v-if="!order.is_paid">尚未付款</span><span v-else class="text-strong">付款完成</span></td>
                   </tr>
                 </tbody>
               </table>
