@@ -19,7 +19,6 @@
         </div>
         <button class="w-100 btn btn-lg btn-dark btn-hover mb-3 rounded-0" type="submit">登入</button>
       </Form>
-      <p class="text-center">使用 ibike@gmail.com 及 ibike123 登入</p>
     </main>
   </div>
   <Footer/>
