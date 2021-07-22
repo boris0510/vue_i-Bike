@@ -1,5 +1,5 @@
 <template>
-  <div class="message-alert">
+  <div class="alert-message">
     <div
       class="alert alert-strong alert-dismissible rounded-0 border-0"
       :class="`text-${item.status}`"
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style scope>
-.message-alert {
+.alert-message {
   position: fixed;
   max-width: 50%;
   top: 90px;
