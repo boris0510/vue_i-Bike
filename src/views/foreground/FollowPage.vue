@@ -7,7 +7,7 @@
       <h1 class="fs-2 text-center fw-bold" v-if="followProduct.length !== 0">我的收藏</h1>
       <div class="d-flex flex-column align-items-center" v-if="followProduct.length === 0">
         <p class="fs-2 fw-bold">目前沒有收藏的產品 !</p>
-        <a href="#/products/all" class="btn btn-dark btn-hover rounded-0 mt-4">查看產品 Go</a>
+        <a href="#/products/all" class="btn btn-dark btn-hover rounded-0 mt-5">查看產品 Go</a>
       </div>
       <div class="row row-cols-1 row-cols-md-5 g-3 mt-5" v-if="followProduct.length !== 0">
         <div class="col" v-for="item in followProduct" :key="item.id">
@@ -43,20 +43,20 @@
       </div>
     </div>
   </div>
-  <!-- <Footer/> -->
+  <Footer/>
 </template>
 
 <script>
 import Navber from '@/components/Navber.vue'
 import Banner from '@/components/Banner.vue'
-// import Footer from '@/components/Footer.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'FollowPage',
   components: {
     Navber,
-    Banner
-    // Footer
+    Banner,
+    Footer
   },
   data () {
     return {

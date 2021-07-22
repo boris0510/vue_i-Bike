@@ -141,6 +141,6 @@ export default {
 
 <style scoped>
 .CheckOrder{
-  min-height: calc(100vh - 550px);
+  /* min-height: calc(100vh - 550px); */
 }
 </style>

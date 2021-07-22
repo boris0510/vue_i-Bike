@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer bg-dark mt-3 mt-md-5">
-    <div class="container py-4">
+  <footer class="footer bg-dark mt-3 py-4 mt-md-5">
+    <div class="container">
       <ul class="list-inline text-center">
         <li class="list-inline-item text-light">
           © Copright 2021 i-Bike
@@ -35,3 +35,9 @@
     </div>
   </footer>
 </template>
+
+<style scope>
+.footer {
+  height: 150px;
+}
+</style>
