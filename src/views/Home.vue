@@ -1,6 +1,5 @@
 <template>
   <Navber/>
-  <GoTop/>
   <Banner/>
   <div class="home mt-5">
     <Loading v-model:active="isLoading"/>
@@ -143,7 +142,6 @@
 import Navber from '@/components/Navber.vue'
 import Banner from '@/components/Banner.vue'
 import Footer from '@/components/Footer.vue'
-import GoTop from '@/components/GoTop.vue'
 import $ from 'jquery'
 
 export default {
@@ -151,8 +149,7 @@ export default {
   components: {
     Navber,
     Banner,
-    Footer,
-    GoTop
+    Footer
   },
   data () {
     return {

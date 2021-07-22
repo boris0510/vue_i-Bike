@@ -1,6 +1,5 @@
 <template>
   <Navber/>
-  <GoTop/>
   <div class="checkoutPay">
     <Loading v-model:active="isLoading"/>
     <div class="container">
@@ -92,14 +91,12 @@
 <script>
 import Navber from '@/components/Navber.vue'
 import Footer from '@/components/Footer.vue'
-import GoTop from '@/components/GoTop.vue'
 
 export default {
   name: 'CheckoutPay',
   components: {
     Navber,
-    Footer,
-    GoTop
+    Footer
   },
   data () {
     return {

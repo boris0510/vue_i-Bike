@@ -1,6 +1,5 @@
 <template>
   <Navber/>
-  <GoTop/>
   <Banner/>
   <div class="CheckOrder mt-5">
     <Loading v-model:active="isLoading"/>
@@ -99,15 +98,13 @@
 import Navber from '@/components/Navber.vue'
 import Banner from '@/components/Banner.vue'
 import Footer from '@/components/Footer.vue'
-import GoTop from '@/components/GoTop.vue'
 
 export default {
   name: 'CheckOrder',
   components: {
     Navber,
     Banner,
-    Footer,
-    GoTop
+    Footer
   },
   data () {
     return {

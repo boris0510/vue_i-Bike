@@ -1,6 +1,5 @@
 <template>
   <Navber/>
-  <GoTop/>
   <div class="cart">
     <Loading v-model:active="isLoading"/>
     <div class="container">
@@ -76,14 +75,12 @@
 <script>
 import Navber from '@/components/Navber.vue'
 import Footer from '@/components/Footer.vue'
-import GoTop from '@/components/GoTop.vue'
 
 export default {
   name: 'Cart',
   components: {
     Navber,
-    Footer,
-    GoTop
+    Footer
   },
   data () {
     return {

@@ -1,6 +1,5 @@
 <template>
   <Navber/>
-  <GoTop/>
   <Banner/>
   <div class="FollowPage mt-5">
     <Loading v-model:active="isLoading"/>
@@ -44,22 +43,20 @@
       </div>
     </div>
   </div>
-  <Footer/>
+  <!-- <Footer/> -->
 </template>
 
 <script>
 import Navber from '@/components/Navber.vue'
 import Banner from '@/components/Banner.vue'
-import Footer from '@/components/Footer.vue'
-import GoTop from '@/components/GoTop.vue'
+// import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'FollowPage',
   components: {
     Navber,
-    Banner,
-    Footer,
-    GoTop
+    Banner
+    // Footer
   },
   data () {
     return {
@@ -94,9 +91,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.FollowPage{
-  min-height: calc(100vh - 550px);
-}
-</style>

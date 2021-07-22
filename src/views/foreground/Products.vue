@@ -1,6 +1,5 @@
 <template>
   <Navber/>
-  <GoTop/>
   <div class="products">
     <div class="container">
       <!-- 優惠碼 -->
@@ -61,14 +60,12 @@
 <script>
 import Navber from '@/components/Navber.vue'
 import Footer from '@/components/Footer.vue'
-import GoTop from '@/components/GoTop.vue'
 
 export default {
   name: 'Products',
   components: {
     Navber,
-    Footer,
-    GoTop
+    Footer
   },
   methods: {
     toProducts (e) {
