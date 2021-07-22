@@ -138,9 +138,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.CheckOrder{
-  /* min-height: calc(100vh - 550px); */
-}
-</style>
