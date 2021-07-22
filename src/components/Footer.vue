@@ -38,6 +38,7 @@
 
 <style scope>
 .footer {
-  height: 150px;
+  position: sticky;
+  top: 100%;
 }
 </style>
