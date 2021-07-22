@@ -4,7 +4,7 @@
     <div class="container">
       <!-- 優惠碼 -->
       <div class="row d-flex justify-content-center align-items-center border py-3 mx-0">
-        <div class="col-md-3 text-center">
+        <div class="col-md-2 text-center d-none d-md-block">
           <img src="https://images.unsplash.com/photo-1566591286939-369d286ecfff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="優惠碼" width="200">
         </div>
         <div class="col-md-9 pt-4 fs-4">
