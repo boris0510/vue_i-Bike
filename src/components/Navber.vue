@@ -26,7 +26,7 @@
           <!-- 購物車按鈕 -->
           <a class="navbar-brand text-dark me-0 a-hover cart" href="#" @click.prevent="" data-bs-toggle="dropdown">
             <i class="fas fa-shopping-cart"></i>
-            <span class="badge text-light bg-danger">{{ carts.length }}</span>
+            <span class="badge text-light bg-danger" v-if="carts.length>0">{{ carts.length }}</span>
           </a>
           <div
             class="dropdown-menu dropdown-menu-end cart-box p-3 me-3"
