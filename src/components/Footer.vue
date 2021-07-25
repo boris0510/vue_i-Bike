@@ -19,6 +19,11 @@
         </li>
         <li class="list-inline-item ms-2">
           <a class="text-light" href="#" @click.prevent="">
+            <i class="fab fa-facebook-messenger"></i>
+          </a>
+        </li>
+        <li class="list-inline-item ms-2">
+          <a class="text-light" href="#" @click.prevent="">
             <i class="fab fa-instagram"></i>
           </a>
         </li>
