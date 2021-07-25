@@ -3,7 +3,7 @@
     <div class="container">
       <ul class="list-inline text-center">
         <li class="list-inline-item text-light">
-          © Copright 2021 i-Bike
+          © Copyright 2021 i-Bike
         </li>
       </ul>
       <ul class="list-inline text-center">
